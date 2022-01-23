@@ -1,0 +1,15 @@
+<%= @list.name %>
+<%= link_to "add a movie", new_list_bookmark_path(@list[:id]) %>
+<div class="cards">
+  <% @list.movies.each do |movie| %>
+    <div class="card-category" style="background-image: <%=movie.poster_url%>">
+  <p><%= movie.title%></p>
+  <p><%= movie.overview%></p>
+  <p><%= movie.rating%></p>
+  <% bookmarks = movie.bookmarks.where(list_id: params[:id])%>
+  <% bookmarks.each do |bookmark| %>
+  <%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>  %>
+  <% end %>
+    </div>
+  <% end %>
+</div>
